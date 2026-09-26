@@ -1,103 +1,114 @@
-⚡🧑‍💻 دوستان برای دریافت اطلاعات بیشتر به کانال تلگرام جوین بدید https://t.me/ayhandeveloper
-
----                                                                                                                                                                
-# 🚀 **3X-ui-Panel** | استقرار ابریِ ۳X-UI روی Railway با Nginx Reverse Proxy
----
-<p align="center"> 
-  <img src="https://img.shields.io/badge/Xui--Panel-v4.0-blue?logo=github" /> 
-  <img src="https://img.shields.io/badge/Based-Docker-2496ED?logo=docker" /> 
-  <img src="https://img.shields.io/badge/Deploy-Railway-0B0D0E?logo=railway" /> 
-</p>
-
-### ✨ **پشتیبانی کامل از WebSocket ،HTTP Upgrade ،TCP Reality و gRPC روی یک پورت ابری**
+⚡🧑‍💻 Friends, for more information, join the Telegram channel: [https://t.me/ayhandeveloper](https://t.me/ayhandeveloper?utm_source=gemini)
 
 ---
 
-## 🌟 **معماری پروژه**
-
-در این پروژه، تمام ترافیک‌های وب (مدیریت پنل، لینک‌های سابسکریپشن و اینباندهای HTTP/WS) از طریق **Nginx Reverse Proxy** روی پورت‌های عمومی standard (80/443) مدیریت می‌شوند. برای پروتکل‌های پیشرفته متکی بر جریان مستقیم TCP/gRPC/Reality روی پورت **8080**، از قابلیت **Railway TCP Proxy** استفاده می‌شود تا اتصال بدون اختلال لایه وب برقرار گردد.
-
-> 💡 **چرا این ساختار بهتر است؟** سرویس‌های ابری مانند Railway به‌طور معمول فقط پورت 80/443 را برای Web Services اختصاص می‌دهند. با این معماری، ۵۰ اینباند HTTP/WS پشت Nginx هدایت شده و پورت‌های ترافیک مستقیم مستقیم از طریق TCP Proxy به هسته متصل می‌شوند.
+# 🚀 **3X-ui-Panel** | Cloud Deployment of 3X-UI on Railway with Nginx Reverse Proxy
 
 ---
 
-## 🔥 **ویژگی‌های کلیدی**
+### ✨ **Full Support for WebSocket, HTTP Upgrade, TCP Reality, and gRPC on a Single Cloud Port**
 
-| ویژگی | توضیح |
+---
+
+## 🌟 **Project Architecture**
+
+In this project, all web traffic (panel management, subscription links, and HTTP/WS inbounds) is managed through an **Nginx Reverse Proxy** on standard public ports (80/443). For advanced protocols relying on a direct TCP/gRPC/Reality stream on port **8080**, the **Railway TCP Proxy** feature is utilized to establish a connection without disrupting the web layer.
+
+> 💡 **Why is this structure better?** Cloud services like Railway typically only allocate ports 80/443 for Web Services. With this architecture, 50 HTTP/WS inbounds are routed behind Nginx, and direct traffic ports are connected to the core via the TCP Proxy.
+
+---
+
+## 🔥 **Key Features**
+
+| Feature | Description |
 | --- | --- |
-| ⚡ **3X-UI v3.8.0** | ارتقا به آخرین نسخه رسمی ۳X-UI با کارایی بالاتر |
-| 🛡️ **Nginx Reverse Proxy** | مدیریت مسیرها و پروتکل‌های وب پشت یک پورت واحد |
-| 🔌 **Railway TCP Proxy** | هدایت مستقیم ترافیک پورت `8080` برای پروتکل‌های Reality / gRPC |
-| 🌐 **پشتیبانی فقط در زمانیکه از دامنه‌یشخصی خود که در پشتکلود فلر ثبت‌شده است قابلاستفاده است CF Real IP ** | شناسایی واقعی IP کلاینت‌ها از پشت شبکه CDN کلادفلر |
-| 🔀 **۵۰ مسیر اختصاصی Inbound** | مسیریابی پیش‌فرض از `/in1` (پورت داخلی 8001) تا `/in50` (پورت داخلی 8050) |
-| 🔄 **WS & HTTP Upgrade Ready** | پشتیبانی کامل از WS و HTTP Upgrade روی پورت‌های داخلی 8001 تا 8050 |
-| ⚡ **TCP Reality & xHTTP** | پشتیبانی مستقیم از TCP Reality و xHTTP روی پورت 8080 |
-| 📑 **پشتیبانی مستقیم Sub/Panel** | هدایت شفاف مسیر `/managepanel/` به پورت 3000 و `/sub/` به پورت 2096 |
+| ⚡ **3X-UI v3.8.0** | Upgraded to the latest official 3X-UI version with higher performance |
+| 🛡️ **Nginx Reverse Proxy** | Manages web routes and protocols behind a single port |
+| 🔌 **Railway TCP Proxy** | Direct traffic routing of port `8080` for Reality / gRPC protocols |
+| 🌐 **CF Real IP** | Real client IP detection behind the Cloudflare CDN network (Support is only available when using your own custom domain registered behind Cloudflare) |
+| 🔀 **50 Dedicated Inbound Routes** | Default routing from `/in1` (internal port 8001) to `/in50` (internal port 8050) |
+| 🔄 **WS & HTTP Upgrade Ready** | Full support for WS and HTTP Upgrade on internal ports 8001 to 8050 |
+| ⚡ **TCP Reality & xHTTP** | Direct support for TCP Reality and xHTTP on port 8080 |
+| 📑 **Direct Sub/Panel Support** | Transparent routing of the `/managepanel/` path to port 3000 and `/sub/` to port 2096 |
 
 ---
 
-## 🛠️ **جدول مسیریابی داخلی (Routing Map)**
+## 🛠️ **Internal Routing Map**
 
-| مسیر URL (Path) / پورت | سرویس مقصد داخلی | نوع اتصال / کاربرد |
+| URL Path / Port | Internal Destination Service | Connection Type / Use Case |
 | --- | --- | --- |
-| `/managepanel/` | `127.0.0.1:3000` | داشبورد مدیریت ۳X-UI |
-| `/sub/` | `127.0.0.1:2096` | دریافت لینک‌های اشتراک کلاینت‌ها |
-| `/in1` تا `/in50` | `127.0.0.1:8001` تا `8050` | اینباندهای ترافیکی Nginx (WS / HTTP Upgrade) |
-| **Port 8080** | `127.0.0.1:8080` | اینباند مستقیم از طریق Railway TCP Proxy (Reality / xHTTP / gRPC) |
+| `/managepanel/` | `127.0.0.1:3000` | 3X-UI management dashboard |
+| `/sub/` | `127.0.0.1:2096` | Retrieving client subscription links |
+| `/in1` to `/in50` | `127.0.0.1:8001` to `8050` | Nginx traffic inbounds (WS / HTTP Upgrade) |
+| **Port 8080** | `127.0.0.1:8080` | Direct inbound via Railway TCP Proxy (Reality / xHTTP / gRPC) |
 
 ---
 
-## 🔒 **راهنمای جامع تنظیم امنیت و اینباندها (Inbound & Security Guide)**
+## 🔒 **Comprehensive Inbound & Security Guide**
 
-### 1️⃣ **اینباندهای مسیرهای `/in1` تا `/in50` (WS / HTTP Upgrade)**
+### 1️⃣ **Inbound Routes from `/in1` to `/in50` (WS / HTTP Upgrade)**
 
-برای ۵۰ اینباند متصل به Nginx (پورت‌های داخلی `443,8002` تا `8050`):
+For the 50 inbounds connected to Nginx (internal ports `8001` to `8050`):
 
-* **ترانسپورت‌های قابل استفاده:** **`WebSocket (WS)`** یا **`HTTP Upgrade`**
-* **Security در پنل:** حتماً روی **`none`** تنظیم شود (چون SSL/TLS توسط لایه بیرونی CDN/Railway هندل می‌شود).
-* **تنظیمات Host (در بخش Panel Host/Domain با دکمه Add Host):**
-  * **Address / Host:** آدرس اصلی دامنه پنل (مثلاً `your-app.up.railway.app`)
-  * **Port:** عدد `443`
-  * **Security / TLS:** فعال (Enabled)
-                                                                                                            * **و از your-app.up.railway.app به عنوان sni استفاده کنید* 
+* **Usable Transports:** **`WebSocket (WS)`** or **`HTTP Upgrade`**
+* **Security in Panel:** Must be set to **`none`** (because SSL/TLS is handled by the outer CDN/Railway layer).
+* **Host Settings (in the Panel Host/Domain section using the Add Host button):**
+* **Address / Host:** Main panel domain address (e.g., `your-app.up.railway.app`)
+* **Port:** The number `443`
+* **Security / TLS:** Enabled
+* *And use your-app.up.railway.app as the sni*
+
+
+
 ---
 
-### 2️⃣ **اینباند پورت `8080` (ارتباط مستقیم با Railway TCP Proxy)**
+### 2️⃣ **Port `8080` Inbound (Direct Connection to Railway TCP Proxy)**
 
-پورت `8080` برای پروتکل‌های لایه ترانسپورت مستقیم رزرو شده است. جهت استفاده از این اینباند:
+Port `8080` is reserved for direct transport layer protocols. To use this inbound:
 
-#### 🔹 **گام اول: فعال‌سازی TCP Proxy در Railway**
-1. در داشبورد Railway وارد پروژه خود شده و به بخش **Settings > Networking** بروید.
-2. روی گزینه **Add TCP Proxy** کلیک کنید.
-3. پورت داخلی را روی **`8080`** قرار دهید.
-4. دامنه اختصاصی TCP Proxy (مانند `domain.proxy.rlwy.net`) و پورت اختصاص‌یافته (مانند `12345`) را کپی کنید.
+#### 🔹 **Step One: Enabling TCP Proxy in Railway**
 
-#### 🔹 **گام دوم: تنظیم بخش Host در پنل ۳X-UI**
-1. وارد پنل شوید، اینباند پورت `8080` را ویرایش کرده و روی **Add Host** کلیک کنید.
-2. **Address / Host:** دامنه TCP Proxy کپی‌شده از Railway (مثلاً `domain.proxy.rlwy.net`)
-3. **Port:** پورت اختصاص‌یافته توسط TCP Proxy (مثلاً `12345`)
+1. In the Railway dashboard, go to your project and navigate to **Settings > Networking**.
+2. Click on the **Add TCP Proxy** option.
+3. Set the internal port to **`8080`**.
+4. Copy the dedicated TCP Proxy domain (e.g., `domain.proxy.rlwy.net`) and the assigned port (e.g., `12345`).
 
-#### 🔹 **حالت‌های قابل استفاده روی اینباند 8080:**
+#### 🔹 **Step Two: Configuring the Host Section in the 3X-UI Panel**
+
+1. Enter the panel, edit the port `8080` inbound, and click on **Add Host**.
+2. **Address / Host:** The TCP Proxy domain copied from Railway (e.g., `domain.proxy.rlwy.net`).
+3. **Port:** The port assigned by the TCP Proxy (e.g., `12345`).
+
+#### 🔹 **Usable Modes on the 8080 Inbound:**
+
 * **🔴 TCP Reality:**
-  * **Transport:** `TCP` | **Security:** `Reality` | **SNI:** دامنه‌های معتبر (مانند `yahoo.com` یا `cloudflare.com`)
+* **Transport:** `TCP` | **Security:** `Reality` | **SNI:** Valid domains (like `yahoo.com` or `cloudflare.com`)
+
+
 * **🟢 xHTTP Reality:**
-  * **Transport:** `xHTTP` | **Path:** `/` | **Security:** `Reality`
-* **🔵 Trojan gRPC Reality (پیشنهاد ویژه ⚡):**
-  * **Protocol:** `Trojan` | **Transport:** `gRPC` | **gRPC Mode:** `Multi` | **Authority / Service Name:** `/` | **Security:** `Reality`
+* **Transport:** `xHTTP` | **Path:** `/` | **Security:** `Reality`
+
+
+* **🔵 Trojan gRPC Reality (Special Recommendation ⚡):**
+* **Protocol:** `Trojan` | **Transport:** `gRPC` | **gRPC Mode:** `Multi` | **Authority / Service Name:** `/` | **Security:** `Reality`
+
+
 
 ---
 
-## 🧬 **ساختار الگویی URI و ساختار کانفیگ کلاینت‌ها**
+## 🧬 **URI Pattern Structure and Client Configuration**
 
-### ۱. الگوی استاندارد VLESS/VMess روی WebSocket یا HTTP Upgrade
-برای اینباندهای متصل به Reverse Proxy (پورت‌های ۸۰۰۱ تا ۸۰۵۰):
+### 1. Standard VLESS/VMess Pattern on WebSocket or HTTP Upgrade
+
+For inbounds connected to the Reverse Proxy (ports 8001 to 8050):
 
 ```text
 vless://[UUID]@[PUBLIC_DOMAIN]:443?type=ws&security=tls&host=[PUBLIC_DOMAIN]&path=%2Fin1&sni=[PUBLIC_DOMAIN]#WS_Inbound_Sample
 
+
 ```
 
-**نحوه تبدیل به شیء Outbound در هسته کلاینت:**
+**How to convert to an Outbound object in the client core:**
 
 ```json
 "streamSettings": {
@@ -114,83 +125,82 @@ vless://[UUID]@[PUBLIC_DOMAIN]:443?type=ws&security=tls&host=[PUBLIC_DOMAIN]&pat
   }
 }
 
+
 ```
 
-### ۲. الگوی استاندارد Trojan gRPC همراه با Reality (متصل به TCP Proxy)
+### 2. Standard Trojan gRPC Pattern with Reality (Connected to TCP Proxy)
 
-برای اینباندهای مستقیم روی پورت ۸۰۸۰:
+For direct inbounds on port 8080:
 
 ```text
 trojan://[PASSWORD]@[TCP_PROXY_DOMAIN]:[TCP_PROXY_PORT]?type=grpc&mode=multi&serviceName=%2F&security=reality&pbk=[PUBLIC_KEY]&fp=chrome&sni=[SNI_DOMAIN]#Trojan_gRPC_Sample
 
+
 ```
 
 ---
 
-## 🧭 **راهنمای نصب و استقرار**
+## 🧭 **Installation and Deployment Guide**
 
-### ۲. اتصال به Railway:
+### 1. Connecting to Railway:
 
-1. وارد [Railway.app](https://railway.app/) شوید.
-2. پروژه جدید ایجاد کرده و گزینه **Deploy from GitHub repo** را انتخاب کنید.
-3. ریپازیتوری `Xui-Panel` را انتخاب کنید.
+1. Log in to [Railway.app](https://railway.app/?utm_source=gemini).
+2. Create a new project and select the **Deploy from GitHub repo** option.
+3. Select the `Xui-Panel` repository.
 
-### ۳. تنظیم TCP Proxy (در صورت نیاز به پورت 8080):
+### 2. Configuring TCP Proxy (if port 8080 is needed):
 
-* در بخش **Settings > Networking** یک TCP Proxy جدید برای پورت `8080` ایجاد کنید.
+* In the **Settings > Networking** section, create a new TCP Proxy for port `8080`.
 
-### ۴. دسترسی به پنل:
+### 3. Accessing the Panel:
 
 ```text
 [https://your-app.up.railway.app/managepanel/](https://your-app.up.railway.app/managepanel/)
 
+
 ```
 
-* **نام کاربری پیش‌فرض**: `admin`
-* **رمز عبور پیش‌فرض**: `admin`
+* **Default Username**: `admin`
+* **Default Password**: `admin`
 
 ---
 
-## 📁 **ساختار پروژه**
+## 📁 **Project Structure**
 
 ```text
 Xui-Panel/
-├── Dockerfile              # تصویر داکری بر پایه Alpine 3.19 + Nginx & 3X-UI v3.6.0
-├── nginx.conf.template     # قالب پیکربندی Nginx همراه با Mappings و CF Real IP
-├── start.sh                # اسکریپت استارت و تنظیم متغیرها
-└── README.md               # مستندات پروژه
+├── Dockerfile              # Docker image based on Alpine 3.19 + Nginx & 3X-UI v3.6.0
+├── nginx.conf.template     # Nginx configuration template with Mappings and CF Real IP
+├── start.sh                # Startup and variable configuration script
+└── README.md               # Project documentation
+
 
 ```
 
 ---
 
-## 🔗 **لینک‌های مفید**
+## 🔗 **Useful Links**
 
-| منبع | آدرس |
+| Source | Address |
 | --- | --- |
-| مخزن پروژه | [AyhanMansur/Xui-Panel](https://github.com/AyhanMansur/Xui-Panel) |
-| پنل اصلی ۳X-UI | [MHSanaei/3x-ui](https://github.com/mhsanaei/3x-ui) |
-| پلتفرم Railway | [railway.app](https://railway.app/) |
+| Project Repository | [AyhanMansur/Xui-Panel](https://github.com/AyhanMansur/Xui-Panel?utm_source=gemini) |
+| Official 3X-UI Panel | [MHSanaei/3x-ui](https://github.com/mhsanaei/3x-ui?utm_source=gemini) |
+| Railway Platform | [railway.app](https://railway.app/?utm_source=gemini) |
 
 ---
 
-## 🤝 **مشارکت کنید!**
+## 🤝 **Contribute!**
 
-اگر ایده‌ای برای بهبود دارید، خوشحال می‌شیم:
+If you have any ideas for improvement, we'd love it if you:
 
-* **Issue** باز کنید
-* **Pull Request** بفرستید
-* یا حتی یک **Star** ⭐ به ما بدید تا بقیه هم پیدا کنند!
-
----
-
-## 📜 **لایسنس**
-
-این پروژه تحت لایسنس **MIT** منتشر شده است — آزاد برای استفاده، تغییر و توزیع.
+* Open an **Issue**
+* Submit a **Pull Request**
+* Or even give us a **Star** ⭐ so others can find it!
 
 ---
 
-<p align="center">
-  <b>✨ با Xui-Panel، مدیریت پروکسی را به اوج سادگی برسانید ✨</b><br/>
-  <i>بدون VPS، فقط یک کانتینر و کمی خلاقیت!</i>
-</p>
+## 📜 **License**
+
+This project is released under the **MIT** license — free to use, modify, and distribute.
+
+---
