@@ -4,7 +4,7 @@
 # 🚀 **3X-ui-Panel** | استقرار ابریِ ۳X-UI روی Railway با Nginx Reverse Proxy
 ---
 <p align="center"> 
-  <img src="https://img.shields.io/badge/3X-UI--Panel-v8.5-blue?logo=github" /> 
+  <img src="https://img.shields.io/badge/3Xui--Panel-v8.5-blue?logo=github" /> 
   <img src="https://img.shields.io/badge/Based-Docker-2496ED?logo=docker" /> 
   <img src="https://img.shields.io/badge/Deploy-Railway-0B0D0E?logo=railway" /> 
 </p>
